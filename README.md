@@ -1,7 +1,7 @@
 <p align="center">
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/hotash/laravel-authable" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/hotash/laravel-authable" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/hotash/laravel-authable" alt="License"></a>
+<a href="https://packagist.org/packages/hotash/laravel-authable"><img src="https://img.shields.io/packagist/dt/hotash/laravel-authable" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/hotash/laravel-authable"><img src="https://img.shields.io/packagist/v/hotash/laravel-authable" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/hotash/laravel-authable"><img src="https://img.shields.io/packagist/l/hotash/laravel-authable" alt="License"></a>
 </p>
 
 ## About Package
@@ -14,6 +14,12 @@
 composer require hotash/laravel-authable
 php artisan jetstream:install inertia --teams --api --verification --ssr
 ```
+1. Extend Middlewares
+2. Replace app/Actions
+3. Update JetstreamServiceProvider
+
+Put in `boot` method:
+`AuthableServiceProvider::fortify();`
 
 ## Contributing
 
