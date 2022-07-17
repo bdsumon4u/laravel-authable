@@ -1,0 +1,24 @@
+{
+    "name": "hotash/laravel-authable",
+    "description": "Authentication package for Laravel.",
+    "type": "package",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Hotash\\Authable\\": "src"
+        },
+        "files": [
+            "functions.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Hotash\\Authable\\Providers\\AuthableServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "laravel/jetstream": "^2.10"
+    }
+}
