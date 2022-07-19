@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 
 abstract class Registrar
 {
+    public static mixed $viewSpace = null;
+
     private static array $stack = [];
 
     /**
@@ -115,14 +117,8 @@ abstract class Registrar
      */
     public static function viewSpace(): string
     {
-        if (! $guard = static::guard()) {
-            return '';
-        }
+        $callback = static::$stack[$guard = static::guard()]['viewSpace'] ?? static::$viewSpace;
 
-        if (! $callback = static::$stack[$guard]['viewSpace']) {
-            return '';
-        }
-
-        return $callback($guard);
+        return is_callable($callback) ? $callback($guard) : '';
     }
 }
