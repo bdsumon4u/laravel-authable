@@ -17,7 +17,7 @@ class RegistrationTest extends TestCase
 
     public function test_registration_screen_can_be_rendered()
     {
-        if (! in_array(Features::registration(), Registrar::all()[$this->guard]['features'])) {
+        if (! in_array(Features::registration(), Registrar::features(guard: $this->guard, key: 'jetstream'))) {
             return $this->markTestSkipped('Registration support is not enabled.');
         }
 
@@ -28,7 +28,7 @@ class RegistrationTest extends TestCase
 
     public function test_registration_screen_cannot_be_rendered_if_support_is_disabled()
     {
-        if (! in_array(Features::registration(), Registrar::all()[$this->guard]['features'])) {
+        if (in_array(Features::registration(), Registrar::features(guard: $this->guard, key: 'jetstream'))) {
             return $this->markTestSkipped('Registration support is enabled.');
         }
 
@@ -39,7 +39,7 @@ class RegistrationTest extends TestCase
 
     public function test_new_admins_can_register()
     {
-        if (! in_array(Features::registration(), Registrar::all()[$this->guard]['features'])) {
+        if (! in_array(Features::registration(), Registrar::features(guard: $this->guard, key: 'jetstream'))) {
             return $this->markTestSkipped('Registration support is not enabled.');
         }
 

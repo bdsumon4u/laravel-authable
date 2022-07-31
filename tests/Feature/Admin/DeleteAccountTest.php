@@ -3,6 +3,7 @@
 namespace Tests\Feature\Admin;
 
 use App\Models\Admin;
+use Hotash\Authable\Registrar;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Jetstream\Features;
 use Tests\TestCase;
@@ -15,7 +16,7 @@ class DeleteAccountTest extends TestCase
 
     public function test_admin_accounts_can_be_deleted()
     {
-        if (! Features::hasAccountDeletionFeatures()) {
+        if (! in_array(Features::accountDeletion(), Registrar::features(guard: $this->guard, key: 'jetstream'))) {
             return $this->markTestSkipped('Account deletion is not enabled.');
         }
 
@@ -30,7 +31,7 @@ class DeleteAccountTest extends TestCase
 
     public function test_correct_password_must_be_provided_before_account_can_be_deleted()
     {
-        if (! Features::hasAccountDeletionFeatures()) {
+        if (! in_array(Features::accountDeletion(), Registrar::features(guard: $this->guard, key: 'jetstream'))) {
             return $this->markTestSkipped('Account deletion is not enabled.');
         }
 

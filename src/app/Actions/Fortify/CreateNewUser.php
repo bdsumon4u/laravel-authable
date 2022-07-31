@@ -29,7 +29,7 @@ class CreateNewUser implements CreatesNewUsers
     {
         $model = Registrar::model();
 
-        abort_unless(in_array(Features::registration(), Registrar::features('fortify')), Response::HTTP_NOT_FOUND);
+        abort_unless(in_array(Features::registration(), Registrar::features(key: 'fortify')), Response::HTTP_NOT_FOUND);
 
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],

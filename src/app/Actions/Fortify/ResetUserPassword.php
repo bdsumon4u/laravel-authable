@@ -22,7 +22,7 @@ class ResetUserPassword implements ResetsUserPasswords
      */
     public function reset($user, array $input)
     {
-        abort_unless(in_array(Features::resetPasswords(), Registrar::features('fortify')), Response::HTTP_NOT_FOUND);
+        abort_unless(in_array(Features::resetPasswords(), Registrar::features(key: 'fortify')), Response::HTTP_NOT_FOUND);
 
         Validator::make($input, [
             'password' => $this->passwordRules(),

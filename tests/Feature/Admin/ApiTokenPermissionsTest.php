@@ -3,6 +3,7 @@
 namespace Tests\Feature\Admin;
 
 use App\Models\Admin;
+use Hotash\Authable\Registrar;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
@@ -16,7 +17,7 @@ class ApiTokenPermissionsTest extends TestCase
 
     public function test_api_token_permissions_can_be_updated()
     {
-        if (! Features::hasApiFeatures()) {
+        if (! in_array(Features::api(), Registrar::features(guard: $this->guard, key: 'jetstream'))) {
             return $this->markTestSkipped('API support is not enabled.');
         }
 
