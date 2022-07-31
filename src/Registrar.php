@@ -81,14 +81,6 @@ abstract class Registrar
     /**
      * @return string
      */
-    public static function model(): string
-    {
-        return static::$stack[static::guard()]['model'] ?? User::class;
-    }
-
-    /**
-     * @return string
-     */
     public static function as(): string
     {
         if ($guard = static::guard()) {
@@ -99,12 +91,29 @@ abstract class Registrar
     }
 
     /**
+     * @return array
+     */
+    public static function data(string $guard = null): array
+    {
+        return static::$stack[$guard ?: static::guard()] ?? [];
+    }
+
+    /**
+     * @return string
+     */
+    public static function model(): string
+    {
+        return static::data()['model'] ?? User::class;
+    }
+
+    /**
+     * @param  string|null  $guard
      * @param  string|null  $key
      * @return array
      */
-    public static function features(string $key = null): array
+    public static function features(string $guard = null, string $key = null): array
     {
-        $features = static::$stack[static::guard()]['features'] ?? [
+        $features = static::data($guard)['features'] ?? [
             'fortify' => config('fortify.features', []),
             'jetstream' => config('jetstream.features', []),
         ];
@@ -117,7 +126,7 @@ abstract class Registrar
      */
     public static function viewSpace(): string
     {
-        $callback = static::$stack[$guard = static::guard()]['viewSpace'] ?? static::$viewSpace;
+        $callback = static::data($guard = static::guard())['viewSpace'] ?? static::$viewSpace;
 
         return is_callable($callback) ? $callback($guard) : '';
     }

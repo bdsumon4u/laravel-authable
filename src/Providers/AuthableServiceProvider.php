@@ -51,7 +51,7 @@ class AuthableServiceProvider extends ServiceProvider
         });
 
         Fortify::requestPasswordResetLinkView(function () {
-            abort_unless(in_array(Features::resetPasswords(), Registrar::features('fortify')), Response::HTTP_NOT_FOUND);
+            abort_unless(in_array(Features::resetPasswords(), Registrar::features(key: 'fortify')), Response::HTTP_NOT_FOUND);
 
             return Inertia::render(Registrar::viewSpace().'Auth/ForgotPassword', [
                 'status' => session('status'),
@@ -59,7 +59,7 @@ class AuthableServiceProvider extends ServiceProvider
         });
 
         Fortify::resetPasswordView(function (Request $request) {
-            abort_unless(in_array(Features::resetPasswords(), Registrar::features('fortify')), Response::HTTP_NOT_FOUND);
+            abort_unless(in_array(Features::resetPasswords(), Registrar::features(key: 'fortify')), Response::HTTP_NOT_FOUND);
 
             return Inertia::render(Registrar::viewSpace().'Auth/ResetPassword', [
                 'email' => $request->input('email'),
@@ -68,13 +68,13 @@ class AuthableServiceProvider extends ServiceProvider
         });
 
         Fortify::registerView(function () {
-            abort_unless(in_array(Features::registration(), Registrar::features('fortify')), Response::HTTP_NOT_FOUND);
+            abort_unless(in_array(Features::registration(), Registrar::features(key: 'fortify')), Response::HTTP_NOT_FOUND);
 
             return Inertia::render(Registrar::viewSpace().'Auth/Register');
         });
 
         Fortify::verifyEmailView(function () {
-            abort_unless(in_array(Features::emailVerification(), Registrar::features('fortify')), Response::HTTP_NOT_FOUND);
+            abort_unless(in_array(Features::emailVerification(), Registrar::features(key: 'fortify')), Response::HTTP_NOT_FOUND);
 
             return Inertia::render(Registrar::viewSpace().'Auth/VerifyEmail', [
                 'status' => session('status'),
@@ -82,7 +82,7 @@ class AuthableServiceProvider extends ServiceProvider
         });
 
         Fortify::twoFactorChallengeView(function () {
-            abort_unless(in_array(Features::twoFactorAuthentication(), Registrar::features('fortify')), Response::HTTP_NOT_FOUND);
+            abort_unless(in_array(Features::twoFactorAuthentication(), Registrar::features(key: 'fortify')), Response::HTTP_NOT_FOUND);
 
             return Inertia::render(Registrar::viewSpace().'Auth/TwoFactorChallenge');
         });
